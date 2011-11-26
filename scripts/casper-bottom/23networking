@@ -78,11 +78,11 @@ EOF
             # create a resolv.conf if it is not present
             cp /tmp/net-"${DEVICE}".conf /root/var/log/netboot.config
             #ipconfig quotes DNSDOMAIN, quotes need to be removed for a correct resolv.conf
-            rc_search="$(sed -n "s/^DNSDOMAIN='\(.*\)'/\1/p" /tmp/net-"${DEVICE}".conf)"
+            rc_search="$(sed -n 's/"//g;s/^DNSDOMAIN=//p' /tmp/net-"${DEVICE}".conf)"
             #search might contain multiple entries but domain should only have one.
-            rc_domain="$(sed -n "s/^DNSDOMAIN='\([^ ]*\).*/\1/p" /tmp/net-"${DEVICE}".conf)"
-            rc_server0="$(sed -n "s/^IPV4DNS0='\(.*\)'/\1/p" /tmp/net-"${DEVICE}".conf)"
-            rc_server1="$(sed -n "s/^IPV4DNS1='\(.*\)'/\1/p" /tmp/net-"${DEVICE}".conf)"
+            rc_domain="$(sed -n -e 's/"//g;s/^DNSDOMAIN=\([^ ]\+\) *.*/\1/p'  /tmp/net-"${DEVICE}".conf)"
+            rc_server0="$(sed -n 's/^IPV4DNS0=//p' /tmp/net-"${DEVICE}".conf)"
+            rc_server1="$(sed -n 's/^IPV4DNS1=//p' /tmp/net-"${DEVICE}".conf)"
             rc_server0="nameserver ${rc_server0}"
             if [ "${rc_server1}" = "0.0.0.0" ]; then
                 rc_server1=""

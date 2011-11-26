@@ -1,44 +1,8 @@
-casper (1.292) precise; urgency=low
-
-  * Do not let single quotes get into resolv.conf, otherwise DNS lookups
-    will fail.
-
- -- Evan Dandrea <ev@ubuntu.com>  Fri, 25 Nov 2011 17:00:58 +0000
-
-casper (1.291) precise; urgency=low
-
-  * Just add the live username to /etc/sudoers rather than relying on it to
-    be in the admin group, which is no longer the case as of user-setup
-    1.39ubuntu1 (LP: #893060).
-
- -- Colin Watson <cjwatson@ubuntu.com>  Mon, 21 Nov 2011 18:06:13 +0000
-
-casper (1.290) precise; urgency=low
-
-  [ Mario Limonciello ]
-  * Allow the "device" UUID to be used to resolve UUIDs in addition to the UUID
-    in .disk/info.  Useful for situations that the casper filesystem is on
-    a disk and that disk's UUID is specified on kernel command line.
-
-  [ Colin Watson ]
-  * Use '/sbin/udevadm test-builtin path_id' rather than /lib/udev/path_id,
-    which was removed in udev 174.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Thu, 10 Nov 2011 14:27:01 +0000
-
-casper (1.289) precise; urgency=low
-
-  * Canonicalise debian-installer/locale= / locale= into a UTF-8 locale when
-    processing preseeding, in line with how we set up the locale in the live
-    environment (LP: #882308).
-
- -- Colin Watson <cjwatson@ubuntu.com>  Tue, 08 Nov 2011 15:34:57 +0000
-
-casper (1.288) precise; urgency=low
+casper (1.288) UNRELEASED; urgency=low
 
   * Ignore lines in md5sum.txt that aren't md5sum output (LP: #873401).
 
- -- Colin Watson <cjwatson@ubuntu.com>  Mon, 24 Oct 2011 17:05:55 +0100
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 24 Oct 2011 16:51:44 +0100
 
 casper (1.287) oneiric; urgency=low
 

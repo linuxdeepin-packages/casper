@@ -38,7 +38,15 @@ db_set passwd/username
 db_set passwd/user-uid
 
 if [ -f /root/etc/sudoers ]; then
-    echo "${USERNAME}  ALL=(ALL) NOPASSWD: ALL" >> /root/etc/sudoers
+    if [ "${BUILD_SYSTEM}" = "Ubuntu" ]; then
+	if grep -q '^%admin' /root/etc/sudoers; then
+	    sed -i -e '/^%admin/s/(ALL) ALL$/(ALL) NOPASSWD: ALL/' /root/etc/sudoers
+	else
+	    echo '%admin  ALL=(ALL) NOPASSWD: ALL' >> /root/etc/sudoers
+	fi
+    elif [ "${BUILD_SYSTEM}" = "Debian" ]; then
+		echo "${USERNAME}  ALL=(ALL) NOPASSWD: ALL" >> /root/etc/sudoers
+    fi
 fi
 
 # XXX - awful hack to stop xscreensaver locking the screen (#7150)
