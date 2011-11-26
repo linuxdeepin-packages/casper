@@ -1,0 +1,14 @@
+Index: casper/casper.conf
+===================================================================
+--- casper.orig/casper.conf	2011-11-26 17:36:53.000000000 +0800
++++ casper/casper.conf	2011-11-26 17:42:19.919637673 +0800
+@@ -2,7 +2,7 @@
+ # Supported variables are:
+ # USERNAME, USERFULLNAME, HOST, BUILD_SYSTEM
+ 
+-export USERNAME="ubuntu"
++export USERNAME="deepin"
+ export USERFULLNAME="Live session user"
+-export HOST="ubuntu"
++export HOST="deepin"
+ export BUILD_SYSTEM="Ubuntu"

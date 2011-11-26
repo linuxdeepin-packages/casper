@@ -1,8 +1,10 @@
-casper (1.288) UNRELEASED; urgency=low
+casper (1.292deepin1.is.1.287.1deepin1) oneiric; urgency=low
 
   * Ignore lines in md5sum.txt that aren't md5sum output (LP: #873401).
+  * Modify casper.conf for Linux Deepin, and build package for Deepin.
+  * Apply 23networking patch (LP: #809885).
 
- -- Colin Watson <cjwatson@ubuntu.com>  Mon, 24 Oct 2011 16:51:44 +0100
+ -- Zhang Cheng <zhangcheng@linuxdeepin.com>  Sat, 26 Nov 2011 18:02:44 +0800
 
 casper (1.287) oneiric; urgency=low
 

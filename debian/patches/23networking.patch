@@ -1,0 +1,29 @@
+Index: casper/scripts/casper-bottom/23networking
+===================================================================
+--- casper.orig/scripts/casper-bottom/23networking	2011-11-26 17:36:53.000000000 +0800
++++ casper/scripts/casper-bottom/23networking	2011-11-26 17:54:11.187672096 +0800
+@@ -77,17 +77,16 @@
+         if [ -n "${DEVICE}" ] && [ -e /tmp/net-"${DEVICE}".conf ]; then
+             # create a resolv.conf if it is not present
+             cp /tmp/net-"${DEVICE}".conf /root/var/log/netboot.config
+-            #ipconfig quotes DNSDOMAIN, quotes need to be removed for a correct resolv.conf
+-            rc_search="$(sed -n 's/"//g;s/^DNSDOMAIN=//p' /tmp/net-"${DEVICE}".conf)"
++	    #ipconfig-generated file contains sourceable environment variables
++	    . /tmp/net-"${DEVICE}".conf
++	    rc_search="${DNSDOMAIN}"
+             #search might contain multiple entries but domain should only have one.
+-            rc_domain="$(sed -n -e 's/"//g;s/^DNSDOMAIN=\([^ ]\+\) *.*/\1/p'  /tmp/net-"${DEVICE}".conf)"
+-            rc_server0="$(sed -n 's/^IPV4DNS0=//p' /tmp/net-"${DEVICE}".conf)"
+-            rc_server1="$(sed -n 's/^IPV4DNS1=//p' /tmp/net-"${DEVICE}".conf)"
+-            rc_server0="nameserver ${rc_server0}"
+-            if [ "${rc_server1}" = "0.0.0.0" ]; then
++	    rc_domain="$(echo "${DNSDOMAIN}" | sed -n -e 's/^\([^ ]\+\) *.*/\1/p')"
++	    rc_server0="nameserver ${IPV4DNS0}"
++	    if [ "${IPV4DNS1}" = "0.0.0.0" ]; then
+                 rc_server1=""
+             else
+-                rc_server1="nameserver ${rc_server1}"
++		rc_server1="nameserver ${IPV4DNS1}"
+             fi
+             cat > /root/etc/resolv.conf <<EOF
+ # /etc/resolv.conf
